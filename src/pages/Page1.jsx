@@ -48,9 +48,7 @@ const buttonVariants = {
 
 const TimeSlot = ({ time, selected, onClick }) => (
     <motion.button
-        className={`px-4 py-2 m-1 rounded-md transition-colors ${selected
-            ? 'text-white'
-            : 'bg-white border hover:bg-opacity-80'
+        className={`px-3 sm:px-4 py-2 m-1 rounded-md transition-colors text-sm sm:text-base ${selected ? 'text-white' : 'bg-white border hover:bg-opacity-80'
             }`}
         style={{
             backgroundColor: selected ? '#f04b41' : 'white',
@@ -204,7 +202,7 @@ const Page1 = ({ navigateToPage }) => {
 
     return (
         <motion.div
-            className="flex flex-col items-center justify-center min-h-50 p-6"
+            className="flex flex-col items-center justify-center min-h-50 p-3 sm:p-6"
             style={{
                 backgroundImage: `url(${bgimg2})`,
                 backgroundSize: 'cover',
@@ -217,7 +215,7 @@ const Page1 = ({ navigateToPage }) => {
             transition={{ duration: 0.5 }}
         >
             <motion.div
-                className="text-2xl font-bold mb-6 text-white"
+                className="text-xl sm:text-2xl font-bold mb-3 sm:mb-6 text-white text-center"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{
                     opacity: 1,
@@ -240,9 +238,9 @@ const Page1 = ({ navigateToPage }) => {
                 animate="visible"
                 exit="exit"
             >
-                {/* Booking Calendar Component */}
+                {/* Booking Calendar Component - more compact on mobile */}
                 <motion.div
-                    className="w-full md:max-w-xs mx-auto p-4 pl-12 bg-white rounded-lg shadow-md mb-6"
+                    className="w-full md:max-w-xs mx-auto p-3 sm:p-4 bg-white rounded-lg shadow-md mb-3 sm:mb-6 self-center"
                     variants={itemVariants}
                     whileHover={{
                         boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)",
@@ -250,13 +248,16 @@ const Page1 = ({ navigateToPage }) => {
                     }}
                 >
                     <motion.h2
-                        className="text-lg font-semibold mb-3"
+                        className="text-base sm:text-lg font-semibold mb-2 sm:mb-3 text-center sm:text-left"
                         style={{ color: '#43a6bc' }}
                         variants={itemVariants}
                     >
                         Select a Date
                     </motion.h2>
-                    <motion.div variants={itemVariants}>
+                    <motion.div
+                        variants={itemVariants}
+                        className="flex justify-center"
+                    >
                         <DayPicker
                             mode="single"
                             selected={selectedDate}
@@ -266,18 +267,22 @@ const Page1 = ({ navigateToPage }) => {
                             modifiersStyles={modifiersStyles}
                             styles={{
                                 caption: { color: "#43a6bc" },
+                                day_selected: { backgroundColor: "#f04b41" }
                             }}
                             classNames={{
                                 months: "flex flex-col",
-                                month: "space-y-2",
+                                month: "space-y-1 sm:space-y-2",
                                 table: "w-full border-collapse",
                                 head_row: "flex",
-                                head_cell: "w-8 h-8 text-center font-semibold text-gray-500",
+                                head_cell: "text-xs sm:text-sm w-7 sm:w-8 h-7 sm:h-8 text-center font-semibold text-gray-500",
                                 row: "flex",
-                                cell: "w-8 h-8 text-center",
-                                day: "w-8 h-8 rounded-full hover:bg-gray-100 transition",
+                                cell: "text-xs sm:text-sm w-7 sm:w-8 h-7 sm:h-8 text-center",
+                                day: "w-7 sm:w-8 h-7 sm:h-8 rounded-full hover:bg-gray-100 transition text-xs sm:text-sm",
                                 day_selected: "text-white",
-                                nav_button: "hover:text-gray-800",
+                                nav_button: "hover:text-gray-800 h-6 w-6",
+                                nav: "flex justify-between items-center",
+                                caption_label: "text-sm sm:text-base font-medium",
+                                caption: "flex justify-center py-2 mb-1"
                             }}
                         />
                     </motion.div>
@@ -285,7 +290,7 @@ const Page1 = ({ navigateToPage }) => {
                     <AnimatePresence>
                         {selectedDate && (
                             <motion.div
-                                className="mt-2 text-center text-sm"
+                                className="mt-1 sm:mt-2 text-center text-xs sm:text-sm"
                                 style={{ color: '#2f616d' }}
                                 initial={{ opacity: 0, y: 5 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -298,20 +303,20 @@ const Page1 = ({ navigateToPage }) => {
                     </AnimatePresence>
 
                     <motion.div
-                        className="mt-2 text-xs text-gray-500 flex justify-center space-x-2 pr-6"
+                        className="mt-1 sm:mt-2 text-xs text-gray-500 flex justify-center space-x-2"
                         variants={itemVariants}
                     >
-                        <span><span className="inline-block w-3 h-3 border rounded-full mr-1" style={{ backgroundColor: '#2f616d', borderColor: '#2f616d' }}></span> Available</span>
-                        <span><span className="inline-block w-3 h-3 bg-gray-400 rounded-full mr-1"></span> Unavailable</span>
-                        <span><span className="inline-block w-3 h-3 rounded-full mr-1" style={{ backgroundColor: '#f04b41' }}></span> Selected</span>
+                        <span><span className="inline-block w-2 h-2 sm:w-3 sm:h-3 border rounded-full mr-1" style={{ backgroundColor: '#2f616d', borderColor: '#2f616d' }}></span> Available</span>
+                        <span><span className="inline-block w-2 h-2 sm:w-3 sm:h-3 bg-gray-400 rounded-full mr-1"></span> Unavailable</span>
+                        <span><span className="inline-block w-2 h-2 sm:w-3 sm:h-3 rounded-full mr-1" style={{ backgroundColor: '#f04b41' }}></span> Selected</span>
                     </motion.div>
                 </motion.div>
 
-                {/* Time Slot Selection */}
+                {/* Time Slot Selection - more compact on mobile */}
                 <AnimatePresence>
                     {selectedDate && (
                         <motion.div
-                            className="w-full max-w-md p-4 bg-white rounded-lg shadow-md mb-6"
+                            className="w-full max-w-md p-3 sm:p-4 bg-white rounded-lg shadow-md mb-3 sm:mb-6"
                             initial={{ opacity: 0, scale: 0.95, y: 20 }}
                             animate={{
                                 opacity: 1,
@@ -330,7 +335,7 @@ const Page1 = ({ navigateToPage }) => {
                             }}
                         >
                             <motion.h2
-                                className="text-lg font-semibold mb-3"
+                                className="text-base sm:text-lg font-semibold mb-2 sm:mb-3 text-center sm:text-left"
                                 style={{ color: '#43a6bc' }}
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
@@ -349,7 +354,7 @@ const Page1 = ({ navigateToPage }) => {
                                         className="flex flex-wrap justify-center"
                                         variants={itemVariants}
                                     >
-                                        {availableTimeSlots.map((time, index) => (
+                                        {availableTimeSlots.map((time) => (
                                             <TimeSlot
                                                 key={time}
                                                 time={time}
@@ -362,7 +367,7 @@ const Page1 = ({ navigateToPage }) => {
                                     <AnimatePresence>
                                         {selectedTime && (
                                             <motion.div
-                                                className="mt-3 text-center text-sm"
+                                                className="mt-2 sm:mt-3 text-center text-xs sm:text-sm"
                                                 style={{ color: '#2f616d' }}
                                                 initial={{ opacity: 0, y: 5 }}
                                                 animate={{ opacity: 1, y: 0 }}
@@ -376,7 +381,7 @@ const Page1 = ({ navigateToPage }) => {
                                 </motion.div>
                             ) : (
                                 <motion.div
-                                    className="text-center py-6"
+                                    className="text-center py-4 sm:py-6"
                                     style={{ color: '#f04b41' }}
                                     initial={{ opacity: 0, scale: 0.9 }}
                                     animate={{
@@ -390,7 +395,7 @@ const Page1 = ({ navigateToPage }) => {
                                     }}
                                 >
                                     <motion.p
-                                        className="font-medium"
+                                        className="font-medium text-sm sm:text-base"
                                         initial={{ y: 10, opacity: 0 }}
                                         animate={{ y: 0, opacity: 1 }}
                                         transition={{ delay: 0.2 }}
@@ -398,7 +403,7 @@ const Page1 = ({ navigateToPage }) => {
                                         This date is completely booked.
                                     </motion.p>
                                     <motion.p
-                                        className="mt-2 text-sm"
+                                        className="mt-1 sm:mt-2 text-xs sm:text-sm"
                                         style={{ color: '#2f616d' }}
                                         initial={{ y: 10, opacity: 0 }}
                                         animate={{ y: 0, opacity: 1 }}
@@ -416,7 +421,7 @@ const Page1 = ({ navigateToPage }) => {
             {/* Navigation button */}
             <motion.button
                 onClick={handleGoToPage2}
-                className="px-6 py-2 rounded-md transition-colors focus:outline-none focus:ring-2 disabled:opacity-50 text-white"
+                className="px-4 sm:px-6 py-2 rounded-md transition-colors focus:outline-none focus:ring-2 disabled:opacity-50 text-white text-sm sm:text-base"
                 style={{
                     backgroundColor: selectedDate && selectedTime ? '#f04b41' : '#f04b41aa',
                     boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
@@ -437,14 +442,14 @@ const Page1 = ({ navigateToPage }) => {
                 whileHover={(!selectedDate || !selectedTime) ? {} : buttonVariants.hover}
                 whileTap={(!selectedDate || !selectedTime) ? {} : buttonVariants.tap}
             >
-                Continue to Page 2
+                Continue
             </motion.button>
 
             {/* Helpful message */}
             <AnimatePresence>
                 {(!selectedDate || (!selectedTime && dateHasTimeSlots)) && (
                     <motion.p
-                        className="text-sm text-white mt-2"
+                        className="text-xs sm:text-sm text-white mt-2 text-center"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
